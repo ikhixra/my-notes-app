@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+
+        .logout {
+            float: right;
+            text-decoration: none;
+            color: #fff;
+            background: #e74c3c;
+            padding: 6px 12px;
+            border-radius: 5px;
+        }
+
+        .logout:hover {
+            background: #c0392b;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background: #f7f7f7;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit {
+            text-decoration: none;
+            background: #f39c12;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .edit:hover {
+            background: #d68910;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="/logout" class="logout">Logout</a>
+
+    <h1>📝 My Notes</h1>
+
+    <!-- Add Note -->
+    <form action="/add" method="POST">
+        <input type="text" name="note" placeholder="Write a note..." required>
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Notes List -->
+    <ul>
+        <% notes.forEach(function(note) { %>
+            <li>
+                <span><%= note.text %></span>
+
+                <div class="actions">
+                    <a href="/edit/<%= note._id %>" class="edit">Edit</a>
+
+                    <form action="/delete/<%= note._id %>?_method=DELETE" method="POST">
+                        <button class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            </li>
+        <% }) %>
+    </ul>
+
+</div>
+
+</body>
+</html>
